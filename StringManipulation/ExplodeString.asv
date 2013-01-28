@@ -1,0 +1,31 @@
+
+function StrArray = ExplodeString(String,Delimiter)
+    N           = length(String)        ;
+    NotDone     = true                  ;
+    Buffer      = cell(N+2,1)           ;
+    Counter     = 1                     ;
+    Bottom      = 1                     ;
+    DelimStride = length(Delimiter) - 1 ;
+    Top1        = 2                     ;
+    Top2        = Top1 + DelimStride    ;
+    
+    
+    while NotDone
+        CurrentSet = String(Top1:Top2);
+        
+        if (CurrentSet == Delimiter)
+            Buffer{Counter} = String(Bottom:(Top1-1))	;
+            Counter         = Counter + 1               ;
+            Bottom          = Top2    + 1               ;
+            Top1            = Bottom  + 1               ;
+            Top2            = Top1    + DelimStride     ;
+        else
+            Top1            = Top1 + 1	;
+            Top2            = Top2 + 1  ;
+        end
+        
+        NotDone = Bo < (N+1);
+    end
+    
+    StrArray = deblank(char(Buffer));
+end

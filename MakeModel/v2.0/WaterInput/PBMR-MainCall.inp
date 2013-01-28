@@ -1,0 +1,114 @@
+! PBMR/RCCS MELCOR Model
+! =============================
+!
+!==================================================================================================
+!                                        Environmental Data
+!==================================================================================================
+MEG_DIAGFILE	'MELGENb.diag'
+MEL_DIAGFILE	'MELCORb.diag'
+MEG_OUTPUTFILE	'Dumps\MELGEN-outputb.dump'
+MEL_OUTPUTFILE	'Dumps\MELCOR-outputb.dump'
+PLOTFILE		'PTFs\Plotb.ptf'
+MEG_RESTARTFILE	'Dumps\MELGENb.rst'
+MEL_RESTARTFILE	'Dumps\MELCORControlsb.rst'			NCYCLE		-1
+MESSAGEFILE		'Dumps\Messagesb.dump'
+STATUSFILE		'Dumps\MELCOR-statusb.dump'
+STOPFILE		'Dumps\MELCOR-stopb.dump'
+WRITENEWINP		'Dumps\NewInputb.can'
+EXTDIAGFILE		'Dumps\MELCOR.diagb.xtnd'
+!==================================================================================================
+!
+!==================================================================================================
+!                                               MELGEN 
+!==================================================================================================
+Program MELGEN
+!
+!==============================================================================
+!                                  EXEC Data
+!==============================================================================
+EXEC_INPUT 
+EXEC_TITLE  'PBMR - test' 
+EXEC_JOBID  'PBMR -' 
+!==============================================================================
+!
+!
+!
+!==============================================================================
+!                                   NCG Data
+!==============================================================================
+NCG_INPUT
+NCG_ID 'HE'   ! Helium
+NCG_ID 'H2'   ! Hydrogen
+NCG_ID 'CO'   ! Carbon monoxide
+NCG_ID 'O2'   ! Oxygen
+NCG_ID 'CO2'  ! Carbon dioxide
+NCG_ID 'CH4'  ! Methane
+NCG_ID 'N2'   ! Nitrogen
+!
+!
+!==============================================================================
+!                               File Inclusions
+!==============================================================================
+INCLUDE		'Main-CVH.inp'
+INCLUDE		'Downer_CVH-FL_Model.inp'
+INCLUDE		'Riser1_CVH-FL_Model.inp'
+INCLUDE		'Riser2_CVH-FL_Model.inp'
+INCLUDE		'Front1_HS_Model.inp'
+INCLUDE		'Front2_HS_Model.inp'
+INCLUDE		'Container-TF.inp'
+INCLUDE		'Container-MP.inp'
+!
+!
+!
+EDF_INPUT
+EDF_ID	'Mdot'	WRITE	'Mdots.output'
+EDF_CHN	2
+		1   FL-MFLOW('Riser1-Vol-151',ALL)
+		2   FL-MFLOW('Riser2-Vol-151',ALL)
+EDF_FMT	'(3(F18.7,TR2))'
+EDF_DTW	3	!	Time	dTime/dWrite
+		1		0.0			10.0
+		2		1.0E+4		1.0E-3
+		3		2.0E+4		1.0E+1
+
+
+!
+!
+!
+END Program MELGEN data
+!==================================================================================================
+!
+!
+!
+!
+!==================================================================================================
+!                                               MELCOR Input
+!==================================================================================================
+Program MELCOR
+!
+!==============================================================================
+!                               MEX (EXEC) Data
+!==============================================================================
+EXEC_INPUT
+EXEC_TITLE  'PBMR - test'
+EXEC_JOBID  'PBMR -'
+EXEC_TEND    30.0000000E+03 ! End of calculation time
+EXEC_TIME   3 !  NUMBER TIME       DTMAX       DTMIN    DTEDT      DTPLT    DTRST   DCRST
+            1    0.00000000E+00   0.10000000E-0   0.10000000E-04   0.60000000E+03   0.20000000E+01   0.10000000E+03   0.10000000E+11
+            2    10.0000000E+03   1.00000000E-1   0.10000000E-04   0.60000000E+03   0.20000000E+01   0.10000000E+03   0.10000000E+11
+            3    10.5000000E+03   1.00000000E-1   0.10000000E-04   0.60000000E+03   0.20000000E+01   0.10000000E+03   0.10000000E+11
+EXEC_CPULEFT    0.30000000E+02 ! cpu sec left at end of calculation
+EXEC_CPULIM    0.100E+08 ! Maximum number of CPU seconds allowed for this execution
+!==============================================================================
+!
+!==============================================================================
+!                               CVH MELCOR Data
+!==============================================================================
+CVH_INPUT
+CVH_TRACE   100  ! Calculational trace activation
+!==============================================================================
+!
+!
+!
+END Program MELCOR data
+!==================================================================================================

@@ -1,0 +1,50 @@
+ 
+ MELGEN diagnostic output   PBMR - YT 11/10/09  08:25:52 
+ PBMR - test                                                           
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing EXEC package:
+No errors during input processing EXEC package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing NCG package:
+NO Errors during input processing NCG package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing CVH package:
+NO Errors during input processing CVH package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing FL package:
+NO Errors during input processing FL package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing MP package:
+NO errors during input processing MP package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing HS package:
+NO Errors during input processing HS package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing TF package:
+NO errors during input processing TF package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during input processing EDF package:
+NO Errors during input processing EDF package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during PASS2 input processing NCG package:
+NO Errors during PASS2 input processing NCG package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during PASS2 input processing of MP package:
+NO Errors during PASS2 input processing of MP package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during PASS2 input processing CVH package:
+NO Errors during PASS2 input processing CVH package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during PASS2 input processing FL package:
+NO Errors during PASS2 input processing FL package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during PASS2 input processing HS package:
+NO Errors during PASS2 input processing HS package
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+Diagnostics during PASS3 input processing HS package:
+NO Errors during PASS3 input processing HS package
+ ***********************************************
+ ***********************************************
+ ****  NO ERRORS IN USER INPUT   ***************
+ ***********************************************
+ ***********************************************

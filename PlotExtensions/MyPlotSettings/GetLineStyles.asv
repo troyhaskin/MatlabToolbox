@@ -1,0 +1,13 @@
+function LineStyle = GetLineStyles(NumberOfPlots)
+    
+    ColorSpecifier = ['k','b','r','g','c','m'];
+    LineSpecifier  = [' -','--',' :','-.'];
+    LineStyle      = cell(NumberOfPlots,1);
+    m              = 1
+    
+    
+    for k = 1:NumberOfPlots
+        LineStyle{k} = strcat(LineSpecifier(m),ColorSpecifier(n));
+    end
+    
+end

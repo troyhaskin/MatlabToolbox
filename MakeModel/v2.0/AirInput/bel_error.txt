@@ -1,0 +1,2 @@
+10/11/2009  8: 4:34   Exe_InputPass1: error open file - Front1_HS_Model.inp
+10/11/2009  8: 9: 6   Exe_InputPass1: error open file - Front1_HS_Model.inp

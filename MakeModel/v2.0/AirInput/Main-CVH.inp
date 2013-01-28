@@ -1,0 +1,120 @@
+AllowReplace
+!
+!
+CVH_INPUT
+!
+CV_ID	'Source'		10
+CV_TYP	'RCCS'			
+CV_VAT	2	  !Number Elevation Volume		
+		1	38.00		 0.000000
+		2	40.00		-3.445216
+CV_THR	NonEquil	NoFog	Time-Indep	
+CV_VEL	10.50	0.00	
+CV_PAS	Separate	OnlyAtm	Superheated
+CV_PTD	PVOL	1.01E+05		
+CV_AAD	TATM	3.00E+02		
+CV_NCG	2	PH2O	0.0	
+		1	 'N2'	0.8	
+		2	 'O2'	0.2	
+!
+!
+!
+CV_ID	'Bottom'		20
+CV_TYP	'RCCS'			
+CV_VAT	2	  !Number Elevation Volume		
+		1	-0.1524		 0.000000
+		2	 0.0000		-3.445216
+CV_THR	NonEquil	NoFog	Active	
+CV_VEL	10.50	0.00	
+CV_PAS	Separate	OnlyAtm	Superheated
+CV_PTD	PVOL	1.01E+05		
+CV_AAD	TATM	3.30E+02		
+CV_NCG	2	PH2O	0.0	
+		1	 'N2'	0.8	
+		2	 'O2'	0.2	
+!
+!
+CV_ID	'Top'		30
+CV_TYP	'RCCS'			
+CV_VAT	2	  !Number Elevation Volume		
+		1	38.00		 0.000000
+		2	39.00		-3.445216
+CV_THR	NonEquil	NoFog	Active	
+CV_VEL	10.50	0.00	
+CV_PAS	Separate	OnlyAtm	Superheated
+CV_PTD	PVOL	1.01E+05		
+CV_AAD	TATM	3.30E+02		
+CV_NCG	2	PH2O	0.0	
+		1	 'N2'	0.8	
+		2	 'O2'	0.2	
+!
+!
+CV_ID	'Sink'		40
+CV_TYP	'RCCS'			
+CV_VAT	2	  !Number Elevation Volume		
+		1	39.00		 0.000000
+		2	40.00		-3.445216
+CV_THR	NonEquil	NoFog	Time-Indep	
+CV_VEL	10.50	0.00	
+CV_PAS	Separate	OnlyAtm	Superheated
+CV_PTD	PVOL	1.01E+05		
+CV_AAD	TATM	3.00E+02		
+CV_NCG	2	PH2O	0.0	
+		1	 'N2'	0.8	
+		2	 'O2'	0.2	
+!
+!
+!
+!
+!=====================================================
+FL_INPUT
+!
+!
+FL_ID	'Src2Dwner'	100
+FL_FT	'Source'	'Downer-Vol-000'	38.00	38.00
+FL_GEO	3.716100E+000	2.500000E-001	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	3.716100E+000	2.500000E-001	1.936700E+000
+!
+FL_ID	'Dwner2Bot'	101
+FL_FT	'Downer-Vol-151'	'Bottom'	0.00	0.00
+FL_GEO	3.716100E+000	2.500000E-001	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	3.716100E+000	2.500000E-001	1.936700E+000
+!
+FL_ID	'Bot2Rsr1'	102
+FL_FT	'Bottom'	'Riser1-Vol-000'	0.00	0.00
+FL_GEO	1.85805	2.500000E-001	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	1.85805	2.500000E-001	1.936700E+000
+!
+FL_ID	'Bot2Rsr2'	103
+FL_FT	'Bottom'	'Riser2-Vol-000'	0.00	0.00
+FL_GEO	1.85805	2.500000E-001	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	1.85805	2.500000E-001	1.936700E+000
+!
+FL_ID	'Rsr12Top'	104
+FL_FT	'Riser1-Vol-151'	'Top'	38.00	38.00
+FL_GEO	1.85805	2.500000E-001	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	1.85805	2.500000E-001	1.936700E+000
+!
+FL_ID	'Rsr22Top'	105
+FL_FT	'Riser2-Vol-151'	'Top'	38.00	38.00
+FL_GEO	1.85805	2.500000E-001	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	1.85805	2.500000E-001	1.936700E+000
+!
+FL_ID	'Top2Sink'	106
+FL_FT	'Top'	'Sink'	39.00	39.00
+FL_GEO	1.85805	2.500000E-001	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	3.716100E+000	2.500000E-001	1.936700E+000

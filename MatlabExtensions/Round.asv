@@ -1,0 +1,13 @@
+function Rounded = Round(Array,NearestDecimalPlace)
+   
+    if (nargin < 2)
+        NearestDecimalPlace = 1;
+    end
+    
+    Scale       = 10^(NearestDecimalPlace - 1)  ;
+    ScaledArray = Scale * Array                 ;
+    Rounded     = round(ScaledArray) / Scale    ;
+    
+end
+
+func

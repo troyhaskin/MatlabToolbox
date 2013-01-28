@@ -1,0 +1,322 @@
+AllowReplace
+!
+CVH_INPUT
+!
+!==================	Control Volume 13000	==================
+CV_ID	'HotChim-Vol-00'	13000
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-1.280160E+001	0.000000E+000
+		2	-1.180160E+001	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	2.260000E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13001	==================
+CV_ID	'HotChim-Vol-01'	13001
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-1.180160E+001	0.000000E+000
+		2	-1.080160E+001	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	2.176883E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13002	==================
+CV_ID	'HotChim-Vol-02'	13002
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-1.080160E+001	0.000000E+000
+		2	-9.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	2.093767E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13003	==================
+CV_ID	'HotChim-Vol-03'	13003
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-9.801600E+000	0.000000E+000
+		2	-8.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	2.010650E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13004	==================
+CV_ID	'HotChim-Vol-04'	13004
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-8.801600E+000	0.000000E+000
+		2	-7.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.927533E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13005	==================
+CV_ID	'HotChim-Vol-05'	13005
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-7.801600E+000	0.000000E+000
+		2	-6.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.844417E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13006	==================
+CV_ID	'HotChim-Vol-06'	13006
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-6.801600E+000	0.000000E+000
+		2	-5.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.761300E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13007	==================
+CV_ID	'HotChim-Vol-07'	13007
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-5.801600E+000	0.000000E+000
+		2	-4.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.678183E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13008	==================
+CV_ID	'HotChim-Vol-08'	13008
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-4.801600E+000	0.000000E+000
+		2	-3.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.595067E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13009	==================
+CV_ID	'HotChim-Vol-09'	13009
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-3.801600E+000	0.000000E+000
+		2	-2.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.511950E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13010	==================
+CV_ID	'HotChim-Vol-10'	13010
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-2.801600E+000	0.000000E+000
+		2	-1.801600E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.428833E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13011	==================
+CV_ID	'HotChim-Vol-11'	13011
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-1.801600E+000	0.000000E+000
+		2	-8.016000E-001	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.345717E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13012	==================
+CV_ID	'HotChim-Vol-12'	13012
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	-8.016000E-001	0.000000E+000
+		2	1.984000E-001	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.262600E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13013	==================
+CV_ID	'HotChim-Vol-13'	13013
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	1.984000E-001	0.000000E+000
+		2	1.198400E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.179483E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13014	==================
+CV_ID	'HotChim-Vol-14'	13014
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	1.198400E+000	0.000000E+000
+		2	2.198400E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.096367E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!==================	Control Volume 13015	==================
+CV_ID	'HotChim-Vol-15'	13015
+CV_TYP	'RCCS'
+CV_VAT	2	!Number Elevation Volume
+		1	2.198400E+000	0.000000E+000
+		2	2.590800E+000	8.107320E-003
+CV_THR	NonEquil	NoFog		Active
+CV_PAS	Separate	OnlyPool		Subcooled
+CV_PTD	PVOL	1.013250E+005
+CV_PAD	3.100000E+002
+CV_VEL	0.00	0.00
+!
+!
+!
+!
+!
+!=====================================================
+FL_INPUT
+!
+!==================	Flow Path 13000	==================
+FL_ID	'HotChim-Pth-00'	13000
+FL_FT	'HotChim-Vol-00'	'HotChim-Vol-01'	-1.180160E+001	-1.180160E+001
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13001	==================
+FL_ID	'HotChim-Pth-01'	13001
+FL_FT	'HotChim-Vol-01'	'HotChim-Vol-02'	-1.080160E+001	-1.080160E+001
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13002	==================
+FL_ID	'HotChim-Pth-02'	13002
+FL_FT	'HotChim-Vol-02'	'HotChim-Vol-03'	-9.801600E+000	-9.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13003	==================
+FL_ID	'HotChim-Pth-03'	13003
+FL_FT	'HotChim-Vol-03'	'HotChim-Vol-04'	-8.801600E+000	-8.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13004	==================
+FL_ID	'HotChim-Pth-04'	13004
+FL_FT	'HotChim-Vol-04'	'HotChim-Vol-05'	-7.801600E+000	-7.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13005	==================
+FL_ID	'HotChim-Pth-05'	13005
+FL_FT	'HotChim-Vol-05'	'HotChim-Vol-06'	-6.801600E+000	-6.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13006	==================
+FL_ID	'HotChim-Pth-06'	13006
+FL_FT	'HotChim-Vol-06'	'HotChim-Vol-07'	-5.801600E+000	-5.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13007	==================
+FL_ID	'HotChim-Pth-07'	13007
+FL_FT	'HotChim-Vol-07'	'HotChim-Vol-08'	-4.801600E+000	-4.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13008	==================
+FL_ID	'HotChim-Pth-08'	13008
+FL_FT	'HotChim-Vol-08'	'HotChim-Vol-09'	-3.801600E+000	-3.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13009	==================
+FL_ID	'HotChim-Pth-09'	13009
+FL_FT	'HotChim-Vol-09'	'HotChim-Vol-10'	-2.801600E+000	-2.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13010	==================
+FL_ID	'HotChim-Pth-10'	13010
+FL_FT	'HotChim-Vol-10'	'HotChim-Vol-11'	-1.801600E+000	-1.801600E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13011	==================
+FL_ID	'HotChim-Pth-11'	13011
+FL_FT	'HotChim-Vol-11'	'HotChim-Vol-12'	-8.016000E-001	-8.016000E-001
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13012	==================
+FL_ID	'HotChim-Pth-12'	13012
+FL_FT	'HotChim-Vol-12'	'HotChim-Vol-13'	1.984000E-001	1.984000E-001
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13013	==================
+FL_ID	'HotChim-Pth-13'	13013
+FL_FT	'HotChim-Vol-13'	'HotChim-Vol-14'	1.198400E+000	1.198400E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001
+!
+!==================	Flow Path 13014	==================
+FL_ID	'HotChim-Pth-14'	13014
+FL_FT	'HotChim-Vol-14'	'HotChim-Vol-15'	2.198400E+000	2.198400E+000
+FL_GEO	8.107320E-003	1.000000E+000	1.000000E+000
+FL_USL	0.00	0.00	0.00	0.00
+FL_SEG	1
+		1	8.107320E-003	1.000000E+000	1.016000E-001

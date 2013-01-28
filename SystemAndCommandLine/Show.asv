@@ -1,0 +1,12 @@
+function [] = Show(n)
+    Format      = '%1.20f'   ;
+    Expansion	= '\t%1.20f' ;
+    
+    if (size(n,1) > 2)
+        Format = [Format,repmat(Expansion,1,size(n,1)-1),'\n'];
+    else
+        Format = [
+    end
+    
+	fprintf('%1.20f\n',n);
+end

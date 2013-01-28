@@ -1,0 +1,21 @@
+function Int = GCheb_trial(Function,Start,End,varargin)
+  
+    
+    
+    Parser = inputParser()                                                      ;
+    
+    Parser.addRequired('Function'    , @IsFunctionHandle      )                 ;
+    Parser.addRequired('Start'       , @IsRealScalar          )                 ;
+    Parser.addRequired('End'         , @IsRealScalar          )                 ;
+    Parser.addOptional('Number'  , 10, @(x) IsIntegral(x,'+') )                 ;
+    Parser.parse(Function,Start,End,varargin{:})                                ;
+    
+    Number       = Parser.Results.Number                                        ;
+    Shift1       = 0.5 * (End - Start)                                          ;
+    Shift2       = 0.5 * (End + Start)                                          ;
+    EvalFunction = @(x) Function(Shift1 * x + Shift2) .* sqrt(1-x.^2)           ;
+    Nodes        = GetChebyshevNodesQuick(Number,-1,1)                          ;
+    Weights      = pi / Number                                                  ;
+    Int          = Shift1 * sum(EvalFunction(Nodes) .* Weights)                 ;
+    
+end
