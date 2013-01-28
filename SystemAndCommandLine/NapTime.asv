@@ -1,9 +1,0 @@
-function [] = NapTime()
-	
-	while (1==1)
-		DISP('Nap time. %9.7f\n',20*rand(1));
-		fprintf('Looks like work. %9.7f\t\t %9.7f\n',20*rand(1),6*rand(1));
-		fprintf('Yes, it does. %9.7f\t\t %9.7f\n',20*rand(1),6*rand(1));
-	end
-	
-end
