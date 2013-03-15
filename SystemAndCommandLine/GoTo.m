@@ -15,10 +15,10 @@ function [] = GoTo(Location)
 			cd('C:\Users\Troy Haskin\Desktop');
             
 		case({'tool','toolbox'})
-			cd('C:\MyMatlabToolbox\');
+			cd('C:\Projects\MatlabToolbox\');
             
         case({'sandbox','sand','scratch'})
-            cd('C:\MyMatlabToolbox\Sandbox\Public');
+            cd('C:\Projects\MatlabToolbox\Sandbox\Public');
             
 		otherwise
 			error('Requested location ''%s'' is not supported',Location)
