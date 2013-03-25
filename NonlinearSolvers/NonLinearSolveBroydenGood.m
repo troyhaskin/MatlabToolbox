@@ -8,9 +8,9 @@ function [sol,varargout] = NonLinearSolveBroydenGood(xGuess,Residual,ResidualJac
     Iter    = 0    	;
     rN      = r(xN)	;
     
-    StopTol  = 100*eps()	;
-    StopIter = 1E4          ;
-    NotDone  = true         ;
+    StopTol  = 10*eps() ;
+    StopIter = 1E4      ;
+    NotDone  = true     ;
     
     iJac     = inv(Jac(xN))  ;
    
@@ -32,7 +32,7 @@ function [sol,varargout] = NonLinearSolveBroydenGood(xGuess,Residual,ResidualJac
         NotDone      = any(NotConverged & BelowIterMax)	;
         
     end
-    
+
     sol = xN;
 %     disp(['Iteraions: ',num2str(Iter)]);
 %     disp('sol =');
