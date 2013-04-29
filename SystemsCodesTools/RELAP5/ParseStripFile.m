@@ -13,7 +13,7 @@ function [Data,varargout] = ParseStripFile(FileName)
     
     
 % Expression:       RecordID     Number Format    Padding     Number of Values    
-    Expression  = ['plotrec\s+(\d\.\d+E[\+\-]\d+[\s\r\f\n]*){',NrecordsStr,'}'] ;
+    Expression  = ['plotrec\s+(\-?\d\.\d+E[\+\-]\d+[\s\r\f\n]*){',NrecordsStr,'}'] ;
 
 % Tokenize the file contents by "plotrec"
     Tokens      = regexp(FileContent,Expression,'tokens')                       ;
