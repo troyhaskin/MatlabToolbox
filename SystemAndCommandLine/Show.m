@@ -1,7 +1,7 @@
 function [] = Show(n,Format)
     
     if (nargin < 2)
-        Format      = '%1.14G'   ;
+        Format      = '%+16.6E'   ;
     end
     Expansion	= ['\t',Format] ;
     
