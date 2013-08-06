@@ -1,23 +1,24 @@
-function Soln = ThomasSolve(Lower,Diag,Upper,R)
-	
-	End			= length(Diag)	;
-	Cmod(End,1)	= 0.0			;
-	Rmod(End,1)	= 0.0			;
-	
-	Cmod(1) = Upper(1)/Diag(1);
-	Rmod(1) = R(1)/Diag(1);
-	
-	for k = 2:End
-        invTerm = 1 / (Diag(k) - Cmod(k-1)*Lower(k))        ;
-        Cmod(k) = Upper(k) * invTerm                        ;
-		Rmod(k) = (R(k) - Rmod(k-1)*Lower(k)) * invTerm     ;
-	end
-	
-	
-	Soln(End,1) = Rmod(End);
+function xSol = ThomasSolve(L,D,U,b)
     
-	for k=End-1:-1:1
-		Soln(k) = Rmod(k) - Cmod(k)*Soln(k+1);
-	end
-	
+    End			= length(D) ;
+    Umod(End,1)	= 0.0       ;
+    Bmod(End,1)	= 0.0       ;
+    
+    Umod(1) = U(1)/D(1);
+    Bmod(1) = b(1)/D(1);
+    
+    for k = 2:End-1
+        invTerm = 1 / (D(k) - Umod(k-1)*L(k))       ;
+        Umod(k) = U(k) * invTerm                    ;
+        Bmod(k) = (b(k) - Bmod(k-1)*L(k)) * invTerm ;
+    end
+    
+    Bmod(End) = (b(End) - Bmod(End-1)*L(End)) / (D(End) - Umod(End-1)*L(End));
+    
+    xSol(End,1) = Bmod(End);
+    
+    for k=End-1:-1:1
+        xSol(k) = Bmod(k) - Umod(k)*xSol(k+1);
+    end
+    
 end
