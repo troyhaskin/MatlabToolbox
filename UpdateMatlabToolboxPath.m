@@ -24,7 +24,7 @@ function [] = UpdateMatlabToolboxPath(ToolboxDirectory,ExcludeTopDirectory)
                            '(',strjoin(DirectoriesToExclude,'|'),')',... % Exclusion grouping
                            '.*?;');                                      % Lazy wildcard grab
     
-    % Remove all exluded directories
+    % Remove all excluded directories
     PathToAdd = regexprep(ToolboxPath,ExclusionRegEx,'');
     
     % Remove top level directory if requested

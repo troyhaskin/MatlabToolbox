@@ -1,6 +1,6 @@
 function TheCallerDirectory = CallerDirectory(Level)
     
-    %   For this file, Caller refers to the function that call this function;
+    %   For this file, Caller refers to the function that calls this function;
     %   the Caller is the function that wants its caller's directory.
     %
     %   Stack Level explanation:
@@ -28,7 +28,7 @@ function TheCallerDirectory = CallerDirectory(Level)
                 DifferentNames = 2;
                 
             case('caller')
-                DifferentNames  = 0;
+                DifferentNames = 0;
                 
             otherwise
                 error('MatlabToolBox:FileOperations:UnsupportedLevel',...
@@ -42,23 +42,41 @@ function TheCallerDirectory = CallerDirectory(Level)
     
     %   Get the stack.
     [Stack,~]    = dbstack(1,'-completenames');
-    CallersPath  = Stack(1).file;
-    LineagePaths = {Stack(2:end).file};
     
-    if (0 < DifferentNames) && not(isempty(LineagePaths))
-        Paths    = unique(LineagePaths,'stable');
-        Mask     = cumsum(not(strcmpi(CallersPath,Paths)));
-        FullPath = Paths{find(Mask == DifferentNames,1,'first')};
+    % See if the stack is empty
+    switch(length(Stack))
         
-        TheCallerDirectory = [SplitPath(FullPath,'DirectoryPath'),filesep()];
+        %   An empy call stack implies a call from the command line, so return
+        %   the current working directory with an appended separator.
+        case 0
+            TheCallerDirectory = [pwd(),filesep()];
 
-    elseif isempty(LineagePaths)
-        TheCallerDirectory = [pwd(),filesep()]; % default treatment for nothing above the Caller
-        
-    else
-        TheCallerDirectory = [CallersPath,filesep()];
+
+        %   A call stack with 1 entry implies a call from a script with no function 
+        %   nesting, so return the working directory of the only entry with an appended 
+        %   separator.
+        case 1
+             TheCallerDirectory = [SplitPath(Stack(1).file,'DirectoryPath'),filesep()];
+
+
+        %   A call stack with more than 1 entry implies a call from a function with 
+        %   atleast one nesting, so we'll attack this generally.
+        otherwise
+            CallersPath  = Stack(1).file;
+            LineagePaths = {Stack(2:end).file};
+            
+            if (0 < DifferentNames) && not(isempty(LineagePaths))
+                Paths    = unique(LineagePaths,'stable');
+                Mask     = cumsum(not(strcmpi(CallersPath,Paths)));
+                FullPath = Paths{find(Mask == DifferentNames,1,'first')};
+                
+                TheCallerDirectory = [SplitPath(FullPath,'DirectoryPath'),filesep()];
+                
+            else
+                TheCallerDirectory = [CallersPath,filesep()];
+            end
     end
-
+    
 end
 
 
