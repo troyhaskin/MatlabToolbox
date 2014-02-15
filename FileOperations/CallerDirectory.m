@@ -1,59 +1,73 @@
 function TheCallerDirectory = CallerDirectory(Level)
-    
-    %   For this file, Caller refers to the function that calls this function;
-    %   the Caller is the function that wants its caller's directory.
+    %   CallerDirectory:
+    %       Return the directory of any function in the current run stack.
     %
-    %   Stack Level explanation:
-    %       1 = This function   (CallerDirectory.m)
-    %       2 = Caller function (The function that wants its caller's directory)
-    %       3 = Parent of Caller
-    %       4 = Grandparent of Caller
+    %   Note:
+    %       For this function, the term Caller (with a capital 'C') refers to the function
+    %       that calls this function and acts as a reference point for the levels.
     %
-    %   Therefore, if the first two levels are omitted from the dbstack() call below,
-    %   then the Caller's parent's information is in the first index of each field in
-    %   the return struct.
+    %   Inputs:
+    %       Level (Optional):
+    %           Purpose:
+    %               Determines how far up the stack to go before returning the directory
+    %           Default: 
+    %               0 
+    %           Values:
+    %               -1 => This function   (CallerDirectory.m)
+    %                0 => Caller
+    %                1 => caller of Caller           ('parent')
+    %                2 => caller of caller of Caller ('grandparent');
+    %                ...
+    %   
+    %   Outputs:
+    %       o   The directory of the function at the requested level with an appended
+    %           file separator.
+    %       o   If the stack is empty, the current working directory (pwd) is returned.  
+    %       o   If the requested level is greater than the number of stack entries,
+    %           the last entry's directory is returned.
+    %
     
     
     
     % Simple processing for the Level options
     if (nargin == 0) || isempty(Level)
-        DifferentNames = 1;
+        Level = 0;
         
     elseif ischar(Level)
         switch(lower(Level))
             case('parent')
-                DifferentNames = 1;
+                Level = 1;
                 
             case('grandparent')
-                DifferentNames = 2;
+                Level = 2;
                 
             case('caller')
-                DifferentNames = 0;
+                Level = 0;
                 
             otherwise
                 error('MatlabToolBox:FileOperations:UnsupportedLevel',...
                     'Unknown level option ''%s'' passed.',Level);
         end
-    else
+    elseif not(isnumeric(Level))
         error('MatlabToolBox:FileOperations:UnsupportedClass',...
             'Unsupported class ''%s'' passed; only strings are valid.',class(Level));
     end
     
     
     %   Get the stack.
-    [Stack,~]    = dbstack(1,'-completenames');
+    [Stack,~]    = dbstack('-completenames');
     
     % See if the stack is empty
     switch(length(Stack))
         
-        %   An empy call stack implies a call from the command line, so return
+        %   An empty call stack implies a call from the command line, so return
         %   the current working directory with an appended separator.
         case 0
             TheCallerDirectory = [pwd(),filesep()];
 
 
         %   A call stack with 1 entry implies a call from a script with no function 
-        %   nesting, so return the working directory of the only entry with an appended 
+        %   nesting, so return the directory of the only entry with an appended 
         %   separator.
         case 1
              TheCallerDirectory = [SplitPath(Stack(1).file,'DirectoryPath'),filesep()];
