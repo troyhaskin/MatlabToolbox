@@ -1,4 +1,4 @@
-function TheCallerDirectory = CallerDirectory(Level)
+function TheCallerDirectory = CallingDirectory(Level)
     %   CallerDirectory:
     %       Return the directory of any function in the current run stack.
     %
@@ -24,9 +24,11 @@ function TheCallerDirectory = CallerDirectory(Level)
     %   Outputs:
     %       o   The directory of the function at the requested level with an appended
     %           file separator.
-    %       o   If the stack is empty, the current working directory (pwd) is returned.  
+    %       o   If the stack only contains this function, the current working directory 
+    %           (pwd) is returned with an appended file separator without error or warning.
     %       o   If the requested level is greater than the number of stack entries,
-    %           the last entry's directory is returned.
+    %           the last entry's directory is returned with an appended file separator 
+    %           without error or warning.
     %
     
     
@@ -60,8 +62,7 @@ function TheCallerDirectory = CallerDirectory(Level)
     [Stack,~] = dbstack('-completenames');
     Nstack    = length(Stack);
 
-    %   One entry in the stack indicates this function was called from the command line.
-    %   Current default behavior is to return Matlab's current working directory.
+    
     if (Nstack > 1)
         if ((Level + 2) <= Nstack)
             TheCallerDirectory = [SplitPath(Stack(Level + 2).file,'DirectoryPath'),filesep()];
@@ -69,47 +70,10 @@ function TheCallerDirectory = CallerDirectory(Level)
             TheCallerDirectory = [SplitPath(Stack(end).file,'DirectoryPath'),filesep()];
         end
     else
+        %   One entry in the stack indicates this function was called from the command 
+        %   line. Current default behavior is to return Matlab's current working directory.
         TheCallerDirectory = [pwd(),filesep()];
     end
-
-
-
-%     % Level selection
-%     switch (Level)
-%         
-%         case -1
-%             
-%         
-%         %   An empty call stack implies a call from the command line, so return
-%         %   the current working directory with an appended separator.
-%         case 0
-%             TheCallerDirectory = [SplitPath(Stack(2).file,'DirectoryPath'),filesep()];
-% 
-% 
-%         %   A call stack with 1 entry implies a call from a script with no function 
-%         %   nesting, so return the directory of the only entry with an appended 
-%         %   separator.
-%         case 2
-%              TheCallerDirectory = [SplitPath(Stack(1).file,'DirectoryPath'),filesep()];
-% 
-% 
-%         %   A call stack with more than 1 entry implies a call from a function with 
-%         %   atleast one nesting, so we'll attack this generally.
-%         otherwise
-%             CallersPath  = Stack(1).file;
-%             LineagePaths = {Stack(2:end).file};
-%             
-%             if (0 < DifferentNames) && not(isempty(LineagePaths))
-%                 Paths    = unique(LineagePaths,'stable');
-%                 Mask     = cumsum(not(strcmpi(CallersPath,Paths)));
-%                 FullPath = Paths{find(Mask == DifferentNames,1,'first')};
-%                 
-%                 TheCallerDirectory = [SplitPath(FullPath,'DirectoryPath'),filesep()];
-%                 
-%             else
-%                 TheCallerDirectory = [CallersPath,filesep()];
-%             end
-%     end
     
 end
 

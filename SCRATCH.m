@@ -1,7 +1,15 @@
-clc;
-clear('all');
+function [] = SCRATCH()
+    SCRATCH1();
+end
 
+function [] = SCRATCH1()
+    SCRATCH2();
+end
 
-f = CallerDirectory();
+function [] = SCRATCH2()
+    SCRATCH3();
+end
 
-disp(f)
+function [] = SCRATCH3()
+    CallerDirectory();
+end
