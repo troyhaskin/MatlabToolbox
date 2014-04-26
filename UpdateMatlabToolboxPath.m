@@ -20,9 +20,9 @@ function [] = UpdateMatlabToolboxPath(ToolboxDirectory,ExcludeTopDirectory)
     ToolboxDirectory     = EscapeRegExMetacharacters(ToolboxDirectory);
     
     % Create regular expression for filtering excluded directories
-    ExclusionRegEx= strcat(ToolboxDirectory,'\\'                    ,... % Top directory
-                           '(',strjoin(DirectoriesToExclude,'|'),')',... % Exclusion grouping
-                           '.*?;');                                      % Lazy wildcard grab
+    ExclusionRegEx= strcat(ToolboxDirectory,'\\'                       ,... % Top directory
+                           '(',StringJoin(DirectoriesToExclude,'|'),')',... % Exclusion grouping
+                           '.*?;');                                         % Lazy wildcard grab
     
     % Remove all excluded directories
     PathToAdd = regexprep(ToolboxPath,ExclusionRegEx,'');
@@ -69,4 +69,18 @@ function EscapedString = EscapeRegExMetacharacters(String)
     EscapedString = Escape('{', EscapedString);
     EscapedString = Escape('}', EscapedString);
     
+end
+
+function Joined = StringJoin(String,Joiner)
+   if exist('strjoin','builtin') 
+       Joined = strjoin(String,Joiner);
+   else
+       Joined = [...
+                cellfun(@(c) [c,'|'],String(1:end-1),'UniformOutput',false),...
+                String(end)...
+                ];
+        Joined = strcat(Joined{:});
+   end
+   
+   
 end
