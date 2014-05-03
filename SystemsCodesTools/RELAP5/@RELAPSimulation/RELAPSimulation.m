@@ -50,25 +50,15 @@ classdef RELAPSimulation < handle
 
             if isdir(RSim.PathRoot)
                 
-                Directories             = dir(RSim.PathRoot);
-                RELAPVersionDirectories = Directories       ;
-                RELAPVersionCount       = 0                 ;
-                
-                for k = 1:length(Directories)
-
-                    Directory = Directories(k);
-                    if strfind(Directory.name, 'r3d')
-                        RELAPVersionCount = RELAPVersionCount + 1;
-                        RELAPVersionDirectories(RELAPVersionCount) = Directory;
-                    end
-
-                end
-
-                % Pull the actual RELAPVersionDirectories
-                RELAPVersionDirectories = RELAPVersionDirectories(1:RELAPVersionCount);
+                DirectoryInfo       = dir(RSim.PathRoot)                ;
+                DirectoryNames      = cell(1,length(DirectoryInfo))     ;
+                [DirectoryNames{:}] = DirectoryInfo(:).name             ;
+                IsRELAPDirectory    = strfind(DirectoryNames,'r3d')     ;
+                DirectoryNames      = DirectoryNames(IsRELAPDirectory)  ;
+                VersionCount        = length(DirectoryNames)            ;
 
 
-                switch(RELAPVersionCount)
+                switch(VersionCount)
 
                     % No version found
                     case 0
@@ -78,11 +68,13 @@ classdef RELAPSimulation < handle
 
                     % One version found
                     case 1
-                        RSim.VersionDirectory = RELAPVersionDirectories(1).name;
+                        RSim.VersionDirectory = DirectoryNames{1}   ;
 
 
                     % Multiple versions found
                     otherwise
+                        Versions = RSim.GetVersionFromDirectoryName(DirectoryNames);
+
                         fprintf('Multiple versions of RELAP were found in the root folder.  Choose one:\n');
 
                 end
