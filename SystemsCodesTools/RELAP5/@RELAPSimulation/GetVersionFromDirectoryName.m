@@ -1,5 +1,9 @@
-function Version = GetVersionFromDirectoryName(DirectoryNames)
+function Version = GetVersionFromDirectoryName(RSim)
 
-    Version = 
+    DirectoryNames = cellfun(@(c)   strrep(strrep(c,'r3d',''),'ie','')  ,...
+                                    RSim.ValidVersionDirectoryNames     ,...
+                                    'UniformOutput', false);
+    Version = cellfun(@(c)  Interpose(num2str(c),'.'),...
+                            DirectoryNames,'UniformOutput',false);
     
 end

@@ -4,87 +4,101 @@ classdef RELAPSimulation < handle
     properties
         
         % Path information
-        PathRoot                = 'C:\r5\'  ;
-        VersionDirectory        = ''        ;
-        FluidPropertyDirectory  = 'relap'   ;
-        RELAPFolder             = 'relap'   ;
-
-
+        PathRoot             = 'C:\r5'  ;
+        VersionNumber        = ''       ;
+        VersionString        = ''       ;
+        VersionDirectoryName = ''       ;
+        FluidDirectoryName   = 'relap'  ;
+        RELAPDirectoryName   = 'relap'  ;
+        
+        % Options
+        Overwrite     = true    ;
+        AutoIncrement = false   ;
+        
         % Simulation information
         SimulationName          = ''    ;
         InputFileName           = ''    ;
         OutputFileName          = ''    ;
         SequentialFileName      = ''    ;
         DirectAccessFileName    = ''    ;
+        PlotFileName            = ''    ;
         StripFileName           = ''    ;
         SimulationDirectory     = pwd() ;
-
+        
     end % properties
     
     
     properties(Access = private , Hidden = true)
         
         NoInstalledVersion = ['No installation directory for a version of RELAP ',...
-                              'was not found in the root directory ''%s''. Not ',...
-                              'simulations can be run.'];
-
+            'was not found in the root directory ''%s''. Not ',...
+            'simulations can be run.'];
+        
         AbsentRootFolder = ['The default root folder for RELAP5 ''%s'' does ',...
-                            'not exist. Please specify an existing root ',...
-                            'folder to run simulations.'];
+            'not exist. Please specify an existing root ',...
+            'folder to run simulations.'];
+        
+        
+        
+        ValidVersionDirectoryNames = {};
+        ValidVersionStrings        = {};
+        ValidVersionNumbers        = [];
+        
+        AutomateVersionValidation = true;
+        
+        RELAPPath = [];
+        FluidPath = [];
+        
     end % properties
-
-
+    
+    
     methods
         
-        function RSim = RELAPSimulation(Name)
+        % ================================================== %
+        %                   Constructor                      %
+        % ================================================== %
+        function RSim = RELAPSimulation(Name,Version)
             
-            if (nargin == 1)
+            if ( nargin >= 1 )
                 RSim.SimulationName       = Name;
-                RSim.InputFileName        = [Name,'.i' ];
-                RSim.OutputFileName       = [Name,'.o' ];
-                RSim.SequentialFileName   = [Name,'.r' ];
-                RSim.DirectAccessFileName = [Name,'.rr'];
-                RSim.StripFileName        = [Name,'.s' ];
+                RSim.InputFileName        = [Name,'.i'  ];
+                RSim.OutputFileName       = [Name,'.o'  ];
+                RSim.SequentialFileName   = [Name,'.r'  ];
+                RSim.DirectAccessFileName = [Name,'.rr' ];
+                RSim.PlotFileName         = [Name,'.plt'];
+                RSim.StripFileName        = [Name,'.s'  ];
             end
-
-
-            if isdir(RSim.PathRoot)
+            
+            if ( nargin >= 2 )
                 
-                DirectoryInfo       = dir(RSim.PathRoot)                ;
-                DirectoryNames      = cell(1,length(DirectoryInfo))     ;
-                [DirectoryNames{:}] = DirectoryInfo(:).name             ;
-                IsRELAPDirectory    = strfind(DirectoryNames,'r3d')     ;
-                DirectoryNames      = DirectoryNames(IsRELAPDirectory)  ;
-                VersionCount        = length(DirectoryNames)            ;
+                if ischar(Version)
 
+                    % Convert the string to the numeric equivalent
+                    Version = str2double(strrep(Version,'.',''));
 
-                switch(VersionCount)
+                elseif islogical(Version)
 
-                    % No version found
-                    case 0
-                        warning('RELAPSimulation:Constructor:NoInstalledVersion',...
-                                RSim.NoInstalledVersion,RSim.PathRoot);
+                    % Set the automation to the argument's value
+                    RSim.AutomateVersionValidation = Version;
+                    
+                    % Set Version to 0 for default behavior if automation is true
+                    Version = 0;
 
-
-                    % One version found
-                    case 1
-                        RSim.VersionDirectory = DirectoryNames{1}   ;
-
-
-                    % Multiple versions found
-                    otherwise
-                        Versions = RSim.GetVersionFromDirectoryName(DirectoryNames);
-
-                        fprintf('Multiple versions of RELAP were found in the root folder.  Choose one:\n');
-
+                else
+                    warning('RELAPSimulation:Constructor:InvalidVersionClass',...
+                            ['Version specification of class ''%s'' is not ',...
+                             'supported. Please enter a string (e.g., ''2.3.6'') ',...
+                             'or its numerical equivalent (e.g., 236).'],class(Version));
                 end
                 
-                
             else
-                warning('RELAPSimulation:Constructor:AbsentRootFolder',...
-                        RSim.AbsentRootFolder,RSim.PathRoot);
+                Version = 0;
             end
             
+            % Attempt to set the installation information
+            RSim.VerfiyInstallation(Version);
+
+
         end % RELAPSimulation
         
         
@@ -93,3 +107,18 @@ classdef RELAPSimulation < handle
     
     
 end % classdef
+
+
+
+
+function Interposed = Interpose(String,Interloper) %#ok<DEFNU>
+
+    Nstring    = length(String);
+    
+    
+    Interposed(2 * Nstring - 1) = ' ';
+    
+    Interposed(1:2:end) = String;
+    Interposed(2:2:end) = Interloper;
+    
+end % Interpose
