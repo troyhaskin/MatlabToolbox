@@ -1,9 +1,11 @@
 classdef (Abstract = true) GraphAbstract < handle
     
     properties
-        AdjacencyList   = [];
-        AdjacencyMatrix = [];
-        IncidenceMatrix = [];
+        Nodes
+        Edges   
+        AdjacencyList 
+        AdjacencyMatrix
+        IncidenceMatrix
     end
     
     
