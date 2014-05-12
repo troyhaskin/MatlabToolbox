@@ -1,17 +1,15 @@
 classdef (Abstract = true) GraphAbstract < handle
     
     properties
-        Nodes
-        Edges   
-        AdjacencyList 
-        AdjacencyMatrix
-        IncidenceMatrix
+        %   This abstract class outlines the behavior only.
+        %   The details of what data to store are left for concrete
+        %   classes.
     end
     
     
     methods
         
-        %   Test for adjacent nodes x and y
+        %   Test if node y is adjacent to node x
         TrueFalse = IsAdjacent(Graph,x,y)
         
         %   List of all neighboring nodes of node x
