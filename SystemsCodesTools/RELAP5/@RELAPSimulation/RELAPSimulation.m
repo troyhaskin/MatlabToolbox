@@ -35,6 +35,16 @@ classdef RELAPSimulation < handle
         PlotFileName            = ''    ;
         StripFileName           = ''    ;
         SimulationDirectory     = pwd() ;
+        FileNames = struct(...
+            'Input'       , 'input'  , 'Output', 'output', 'Sequential', 'sequential',...
+            'DirectAccess', 'direct' , 'Plot'  , 'plot'  , 'StripOut'  , 'strip'     ,...
+            'Stratch'     , 'scratch', 'Info'  , 'info'  , 'Replay'    , 'replay'    ,...
+            'SCDAP'       , 'scdap'  , 'Dump1' , 'dump1' , 'Dump2'     , 'dump2'     ,...
+            'StripInput'  , '');
+        
+        
+        % Boolean to turn on/off automated version detection
+        AutomateVersionValidation  = true;
         
     end % properties
     
@@ -46,23 +56,33 @@ classdef RELAPSimulation < handle
         ValidVersionStrings        = {};
         ValidVersionNumbers        = [];
         
-        % Boolean to turn on/off automated version detection
-        AutomateVersionValidation  = true;
         
+        %
+        %   FileName flags
+        %
+        FileNamesFlagMap = struct(...
+            'Input'       , 'i', 'Output', 'o', 'Sequential', 'r'   ,...
+            'DirectAccess', 'R', 'Plot'  , 'p', 'Strip'     , 's'   ,...
+            'Stratch'     , 'f', 'Info'  , 'j', 'Replay'    , 'c'   ,...
+            'SCDAP'       , 'a', 'Dump1' , 'A', 'Dump2'     , 'B'   );
         
         % Detected fluid property files
         FluidPropertyFilenames = {};
         FluidNames             = {};
         FluidFlags             = {};
         
+        
+        %
         % Known fluids RELAP supports
+        %
         FluidNameFlagMap = struct(...
-            'he','b','d2o','d','n2','e','glyc','g','h2','h',...
-            'k','k','li','l','na','m','nak','q','lipb','t',...
-            'nh3','u','vertrel','v','h2o','w','dowa','x',...
-            'r134an','y','xen','E','co2','G','blood','H',...
-            'henxen','J','bipb','L','hen','M','pb','Q','h2o95','S',...
-            'ms1','U','ms2','V','h2on','W','ms3','Y','ms4','Z');
+            'he'  , 'b', 'd2o'    , 'd', 'n2'   , 'e', 'glyc'  , 'g', 'h2'    , 'h' ,...
+            'k'   , 'k', 'li'     , 'l', 'na'   , 'm', 'nak'   , 'q', 'lipb'  , 't' ,...
+            'nh3' , 'u', 'vertrel', 'v', 'h2o'  , 'w', 'dowa'  , 'x', 'r134an', 'y' ,...
+            'xen' , 'E', 'co2'    , 'G', 'blood', 'H', 'henxen', 'J', 'bipb'  , 'L' ,...
+            'hen' , 'M', 'pb'     , 'Q', 'h2o95', 'S', 'ms1'   , 'U', 'ms2'   , 'V' ,...
+            'h2on', 'W', 'ms3'    , 'Y', 'ms4'  , 'Z'                               );
+
         AthenaNameFlagMap = struct('d2o','D','h2o','T');
         
     end % properties
@@ -137,13 +157,27 @@ classdef RELAPSimulation < handle
                     end
                     
                     %   Contract to only valid property names
-                    IsProperty = isprop(RSim,Keys);
-                    Keys       = Keys(IsProperty);
-                    Values     = Values(IsProperty);
+                    IsProperty = cellfun(...
+                                    @(k) isprop(RSim,k),Keys,'UniformOutput',true) ;
+                    IsFileName = isfield(RSim.FileNames,Keys);
+                    Nkeys      = nnz(IsProperty)    ;
+                    Nnames     = nnz(IsFileName)    ;
+                    Keys       = [Keys(IsProperty)  , Keys(IsFileName)  ];
+                    Values     = [Values(IsProperty), Values(IsFileName)];
                     
-                    % Assign key-value pairs to the instance.
+                    %
+                    % Assign key-value pairs to the instance properties.
+                    %
                     for k = 1:Nkeys
                         RSim.(Keys{k}) = Values{k};
+                    end
+                    
+                    %
+                    % Assign FileNames to the instance's struct
+                    %
+                    I = Nkeys + (1:Nnames);
+                    for k = I
+                        RSim.FileNames.(Keys{k}) = Values{k};
                     end
 
             end
