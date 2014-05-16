@@ -9,15 +9,16 @@ function ValidMask = GetValidityMaskFromUserInput(RSim,Mask)
     NotDone = true;
     
     while NotDone
-        fprintf('RELAP5Simulation: Detected, installed versions:\n');
-        fprintf('RELAP5Simulation: \to %s\n',VersionStrings{:});
-        fprintf('RELAP5Simulation: Selection:');
+        RSim.Print('Detected, installed versions:\n');
+        RSim.Print('\to %s\n',VersionStrings{:});
+        RSim.Print('Selection:');
         Selection = strtrim(input('','s'));
         
         NotDone = not(any(strcmp(Selection,VersionStrings)));
         
         if NotDone
-            fprintf('\nRELAP5Simulation:  ***Incorrect Selection***\n\n');
+            RSim.Print('\n');
+            RSim.Print('***Incorrect Selection***\n\n');
         end
     end
     

@@ -1,7 +1,7 @@
-function [] = VerfiyInstallation(RSim,Version)
+function [] = VerfiyInstallation(RSim)
     
     % Make sure the Root exists
-    if isdir(RSim.PathRoot)
+    if isdir(RSim.Root)
         
         % Scan for installed versions under the root
         RSim.SetInstalledVersionInformation();
@@ -9,13 +9,13 @@ function [] = VerfiyInstallation(RSim,Version)
         % Select the version from those installed if requested
         switch (RSim.AutomateVersionValidation)
             case true
-                RSim.SetValidVersion(Version);
+                RSim.SetValidVersion();
                 RSim.SetValidFluidInformation();
         end
         
     else
-        warning('RELAPSimulation:VerfiyInstallation:AbsentRootFolder',...
-            RSim.AbsentRootFolder,RSim.PathRoot);
+        
+        RSim.ThrowWarning('VerfiyInstallation:AbsentRootFolder');
     end
     
 end

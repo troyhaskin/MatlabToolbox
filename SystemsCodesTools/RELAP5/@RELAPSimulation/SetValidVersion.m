@@ -1,8 +1,8 @@
-function [] = SetValidVersion(RSim,Version)
+function [] = SetValidVersion(RSim)
     
     % Set the version info if not already done so
     if isempty(RSim.ValidVersionNumbers)
-        RSim.SetInstalledVersionInformation(RSim)
+        RSim.SetInstalledVersionInformation();
     end
     
     % Get the version count
@@ -13,8 +13,7 @@ function [] = SetValidVersion(RSim,Version)
         
         case 0
             % No version found
-            warning('RELAPSimulation:SetValidVersion:NoInstalledVersion',...
-                RSim.NoInstalledVersion,RSim.PathRoot);
+            RSim.ThrowWarning('SetValidVersion:NoInstalledVersion');
             
             
         case 1
@@ -27,28 +26,37 @@ function [] = SetValidVersion(RSim,Version)
         otherwise
             % Multiple versions found
             
-            if any(Version ~= 0)
+            if any(RSim.VersionNumber ~= 0)
                 % Indicates that the user DID specify a version number
-                ValidMask = RSim.GetValidityMaskFromUserArgument(Version);
+                ValidMask = RSim.GetValidityMaskFromUserArgument();
                 
             else
                 % Indicates that the user DID NOT specify a version
                 ValidMask = RSim.GetValidityMaskFromUserInput([]);
                 
             end
+
             
+            % ================================================================ %
+            %                   Version Information Setting                    %
+            % ================================================================ %
             % Assign version-related properties
             RSim.VersionDirectoryName = RSim.ValidVersionDirectoryNames{ValidMask}  ;
             RSim.VersionNumber        = RSim.ValidVersionNumbers(ValidMask)         ;
             RSim.VersionString        = RSim.ValidVersionStrings(ValidMask)         ;
             
-            % Assign version-derived paths
-            RSim.RELAPPath = [  RSim.RootPath               ,'\'    ,...
-                                RSim.VersionDirectoryName   ,'\'    ,...
-                                RSim.RELAPDirectoryName     ,'\'    ];
-            RSim.FluidPath = [  RSim.RootPath               ,'\'    ,...
-                                RSim.VersionDirectoryName   ,'\'    ,...
-                                RSim.FluidDirectoryName     ,'\'    ];
+            % Assign version-derived absolute paths
+            RSim.RELAPAbsolutePath = [  RSim.Root                   ,'\'    ,...
+                                        RSim.VersionDirectoryName   ,'\'    ,...
+                                        RSim.RELAPDirectoryName             ];
+            RSim.FluidAbsolutePath = [  RSim.Root                   ,'\'    ,...
+                                        RSim.VersionDirectoryName   ,'\'    ,...
+                                        RSim.FluidDirectoryName             ];
+
+            % Assign version-derived relative (to Version root) paths
+            RSim.RELAPRelativePath = ['.\',RSim.RELAPDirectoryName];
+            RSim.FluidRelativePath = ['.\',RSim.FluidDirectoryName];
+
     end
     
 end % SetValidVersion
