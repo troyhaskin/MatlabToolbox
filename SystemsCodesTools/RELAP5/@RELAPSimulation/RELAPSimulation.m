@@ -75,11 +75,21 @@ classdef RELAPSimulation < handle
         % ================================================== %
         function RSim = RELAPSimulation(Name,varargin)
             
+            %
+            %   A name for the simulation MUST BE given.
+            %
             if (nargin == 0)
-                RSim.ThrowError('Constructor:NameMissing');
+                error(...
+                    'RELAPSimulation:Constructor:NameMissing'           ,...
+                    ['At least one argument, the simulation name, is '  ,...
+                    'required for instantiation.']);
             end
-            
-            if ( nargin >= 1 )
+
+
+            %
+            %   With a name given, auto-create the default filenames.
+            %
+            if ( nargin >= 1 ) && ischar(Name)
                 RSim.SimulationName       = Name;
                 RSim.InputFileName        = [Name,'.i'  ];
                 RSim.OutputFileName       = [Name,'.o'  ];
@@ -87,6 +97,10 @@ classdef RELAPSimulation < handle
                 RSim.DirectAccessFileName = [Name,'.rr' ];
                 RSim.PlotFileName         = [Name,'.plt'];
                 RSim.StripFileName        = [Name,'.s'  ];
+            else
+                error(...
+                    'RELAPSimulation:Constructor:NameMustBeAString' ,...
+                    'Input argument ''Name'' must be a string.');
             end
             
             
@@ -182,7 +196,12 @@ classdef RELAPSimulation < handle
                 RSim.VersionNumber = 0;
                 
             else
-                RSim.ThrowError('Constructor:InvalidVersionClass',class(VersionArgument));
+                error(...
+                    'RELAPSimulation:Constructor:InvalidVersionClass'       ,...j
+                    ['Version specification of class ''%s'' is not '        ,...
+                    'supported. Please enter a string (e.g., ''2.3.6'') '   ,...
+                    'or its numerical equivalent (e.g., 236).'              ],...
+                    class(VersionArgument));
             end
 
         end % HandleVersionInputArgument
