@@ -1,11 +1,17 @@
-function VFcorrected = EnforceConsistency(VF,SA,Norm,RelTol)
+function VFcorrected = EnforceConsistency(VF,SA,RelTol,Norm)
     
     NotDone = true          ;
     Nvf     = length(VF)    ;
     Iter    = 0             ;
     
-    if(numel(SA) == 1)
+    if   (numel(SA) == 1)
         SA = ones(size(VF)) * SA;
+    else (size(SA,1) == Nvf)
+        SA = repmat(SA,1,Nvf);
+    end
+    
+    if (nargin < 4)
+        Norm = 1;
     end
     
     

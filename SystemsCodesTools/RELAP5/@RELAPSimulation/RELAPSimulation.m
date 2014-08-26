@@ -175,8 +175,7 @@ classdef RELAPSimulation < handle
                     %
                     % Assign FileNames to the instance's struct
                     %
-                    I = Nkeys + (1:Nnames);
-                    for k = I
+                    for k = Nkeys + (1:Nnames)
                         RSim.FileNames.(Keys{k}) = Values{k};
                     end
 
