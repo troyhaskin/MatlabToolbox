@@ -54,7 +54,7 @@ function Hash = SHA256(Message)
         a = Mod32Add(T1,T2);
     end
     
-    % Perform the last iterations, now Wj is needed to be calculate
+    % Perform the last iterations, now Wj needs to be calculate
     for j = 17:64
         W(j) = Mod32Add(sigma1(W(j-2)),...
                     Mod32Add(W(j-7),...
@@ -64,6 +64,7 @@ function Hash = SHA256(Message)
                 Mod32Add(SIGMA1(e),...
                     Mod32Add(Ch(e,f,g),...
                         Mod32Add(K(j),W(j)))));
+
         T2 = Mod32Add(SIGMA0(a),Maj(a,b,c));
         h = g;
         g = f;
