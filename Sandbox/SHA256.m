@@ -9,7 +9,7 @@ function Hash = SHA256(Message)
     SIGMA1 = @(x)  bitxor( S(x,06), bitxor( S(x,11) , S(x,25) ));
     sigma0 = @(x)  bitxor( S(x,07), bitxor( S(x,18) , R(x,03) ));
     sigma1 = @(x)  bitxor( S(x,17), bitxor( S(x,19) , R(x,10) ));
-    Mod32Add = @(x,y) uint32(mod(uint64(x) + uint64(y),2^32));
+    Mod32Add = @(x) uint32(mod(sum(uint64(x)),2^32));
     
     % Initial hash vector
     [H,K] = LoadSHA256InitialVectorAndConstants();
@@ -23,60 +23,50 @@ function Hash = SHA256(Message)
     h = H(8); 
     
     % Count the number of bits in Message
-    M       = uint32(Message);
+    M       = uint8(Message);
     l       = GetMessageBitSize(M);
     
     % Determine the length of the zero padding
     nZeros = 448 - mod(l+1,512);
     
     % Create the padded Message
-    M = [reshape(dec2bin(M,32)',1,l),'1',repmat('0',1,nZeros),dec2bin(l,64)];
+    M = [reshape(dec2bin(M,8)',1,l),'1',repmat('0',1,nZeros),dec2bin(l,64)];
     M = uint32(bin2dec(reshape(M,32,16)'));
     
     % Allocate expanded Message blocks
-    W = uint32(ones(64,1));
+    W = ones(64,1,'uint32');
     W(1:16) = M;
     
     % Perform the compression for the first 16 iterations
     for j = 1:16
-        T1 = Mod32Add(h,...
-                Mod32Add(SIGMA1(e),...
-                    Mod32Add(Ch(e,f,g),...
-                        Mod32Add(K(j),W(j)))));
-        T2 = Mod32Add(SIGMA0(a),Maj(a,b,c));
+        T1 = Mod32Add([h,SIGMA1(e),Ch(e,f,g),K(j),W(j)]);
+        T2 = Mod32Add([SIGMA0(a),Maj(a,b,c)]);
         h = g;
         g = f;
         f = e;
-        e = Mod32Add(d,T1);
+        e = Mod32Add([d,T1]);
         d = c;
         c = b;
         b = a;
-        a = Mod32Add(T1,T2);
+        a = Mod32Add([T1,T2]);
     end
     
     % Perform the last iterations, now Wj needs to be calculate
     for j = 17:64
-        W(j) = Mod32Add(sigma1(W(j-2)),...
-                    Mod32Add(W(j-7),...
-                        Mod32Add(sigma0(W(j-15)),W(j-16)))) ;
-        
-        T1 = Mod32Add(h,...
-                Mod32Add(SIGMA1(e),...
-                    Mod32Add(Ch(e,f,g),...
-                        Mod32Add(K(j),W(j)))));
-
-        T2 = Mod32Add(SIGMA0(a),Maj(a,b,c));
+        W(j) = Mod32Add([sigma1(W(j-2)),W(j-7),sigma0(W(j-15)),W(j-16)]) ;
+        T1 = Mod32Add([h,SIGMA1(e),Ch(e,f,g),K(j),W(j)]);
+        T2 = Mod32Add([SIGMA0(a),Maj(a,b,c)]);
         h = g;
         g = f;
         f = e;
-        e = Mod32Add(d,T1);
+        e = Mod32Add([d,T1]);
         d = c;
         c = b;
         b = a;
-        a = Mod32Add(T1,T2);
+        a = Mod32Add([T1,T2]);
     end
     
-    Hash = Mod32Add([a;b;c;d;e;f;g;h],H);
+    Hash = Mod32Add([[a;b;c;d;e;f;g;h],H]');
     
 end
 
