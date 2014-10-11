@@ -1,6 +1,6 @@
 function En = ExponentialIntegralN(x,n)
     
-    error(nargchk(2,2,nargin));
+    narginchk(2,2);
     
     CheckInputs = inputParser()                                                 ;
     CheckInputs.addRequired('x',@(t)(isvector(t) && isequal(real(t),t)))            ;
