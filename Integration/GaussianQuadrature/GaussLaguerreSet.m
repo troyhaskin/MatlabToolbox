@@ -1,4 +1,4 @@
-function [Nodes,Weights] = GaussLaguerreQuadratureSet(N,NormalizeTo)
+function [Nodes,Weights] = GaussLaguerreSet(N,alpha)
 % ------------------------------------------------------------------------------
 %  Find the nodes and weights for a Gauss-Laguerre Quadrature integration.
 %  Nodes   = Roots of Nth order Laguerre Polynomial
@@ -8,16 +8,22 @@ function [Nodes,Weights] = GaussLaguerreQuadratureSet(N,NormalizeTo)
 %             (N+1)^2*[L_(n+1}(Nodes)^2]
 %
     if (nargin < 2)
-        NormalizeTo = 1;
+        alpha = 0;
     end
     
+    %   Calculate the required recurrence terms
+    k  = 0:(N-1);
+    ak = -(k+1);
+    bk = (2*k + 1 + alpha);
+    ck = -(k + alpha);
     
-    Nodes	= FindLaguerrePRoots(N)  ; % Find the roots (nodes) of the set
-    Lnp1	= @(x)GetLaguerreP(x,N+1); % Get the Nth L.P. function pointer
-    Weights	= Nodes ./ (Lnp1(Nodes).^2) / (N+1)^2;
-    
-    if (nargin > 1)
-        Weights = Weights ./ sum(Weights) * NormalizeTo	; % Normalize to option
+    %   Calculate the weights
+    if (alpha == 0)
+        [Nodes,Weights] = GolubWelsch(ak,bk,ck,1);
+    elseif (round(alpha) == alpha)
+        [Nodes,Weights] = GolubWelsch(ak,bk,ck,factorial(alpha));
+    else
+        [Nodes,Weights] = GolubWelsch(ak,bk,ck,gamma(alpha+1));
     end
     
 %   End of Main Program
