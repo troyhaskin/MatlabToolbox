@@ -9,7 +9,7 @@ function [] = UpdateMatlabToolboxPath(ToolboxDirectory,ExcludeTopDirectory)
     end
     
     % Setup exclusions
-    DirectoriesToExclude = {'.git','Hash','Sandbox'};
+    DirectoriesToExclude = {'.git','Sandbox'};
     DirectoriesToExclude = DirectoriesToExclude(:)' ;
     
     % Generate the full toolbox path
