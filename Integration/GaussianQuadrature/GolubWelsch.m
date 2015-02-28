@@ -12,13 +12,10 @@ function [xk,wk] = GolubWelsch(ak,bk,ck,mu0)
     alpha = sqrt(ak(1:end-1) .* ck(2:end));
     
     %   Build the symmetric tridiagonal matrix
-    T = diag(alpha,-1) + diag(bk) + diag(alpha,+1)  ;
+    T = full(spdiags([alpha,bk,alpha],[-1,0,+1],length(alpha),length(alpha)));
     
     %   Calculate the eigenvectors and values of the matrix
-    [V,L] = eig(T);
-    
-    %   The eigenvalues are the nodes (zeros) of the polynomials
-    xk = diag(L);
+    [V,xk] = eig(T,'vector');
     
     %   Calculate the weights from the eigenvectors - technically, Golub-Welsch requires
     %   a normalization, but since MATLAB returns unit eigenvectors, it is omitted.
