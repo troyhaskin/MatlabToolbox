@@ -1,4 +1,4 @@
-function [Nodes,Weights] = GaussLegendreSet(n)
+function [Nodes,Weights] = GaussLegendreSetNew(N)
     % ------------------------------------------------------------------------------
     %  Find the nodes and weights for a Gauss-Legendre Quadrature integration.
     %  Nodes   = Roots of Nth order Legendre Polynomial
@@ -8,7 +8,7 @@ function [Nodes,Weights] = GaussLegendreSet(n)
     %             (1-Node^2)*[dPdx(Nodes)^2]
     %
     
-    switch(n)
+    switch(N)
         case(1)
             Nodes   = 0;
             Weights = 2;
@@ -33,33 +33,14 @@ function [Nodes,Weights] = GaussLegendreSet(n)
             Weights = [cHi;cLo;cLo;cHi];
             
         otherwise
-            d = (0:n)';
-            a = (d+1)./(2*d+1);
+            n = (0:N)';
+            a = (n+1)./(2*n+1);
             b = 0*a;
-            c = d./(2*d+1);
+            c = n./(2*n+1);
             Nodes   = GolubWelschPartial(a,b,c);
-            Nodes   = newtonCorrection(Nodes,n);
-            Weights = 2/(n+1)^2*(1-Nodes.^2)./(Legendre(Nodes,n+1).^2);
+            Weights = 2/(N+1)^2*(1-Nodes.^2)./(Legendre(Nodes,N+1).^2);
     end
     
-
-    function nodes = newtonCorrection(nodes,n)
-        iter     = 0    ;
-        iterMax  = 10   ;
-        absTol   = eps();
-        
-        [Pn,DPn] = Legendre(nodes,n);
-        dnode    = Pn./DPn          ;
-        
-        notDone = (norm(dnode,Inf) > absTol) & (iter < iterMax);
-        while notDone
-            nodes    = nodes - dnode    ;
-            [Pn,DPn] = Legendre(nodes,n);
-            dnode    = Pn./DPn          ;
-            iter     = iter + 1         ;
-            
-            notDone  = (norm(dnode,Inf) > absTol) & (iter < iterMax);
-        end
-    end
-    
+    %   End of Main Program
+    % ------------------------------------------------------------------------------
 end

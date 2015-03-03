@@ -46,12 +46,16 @@ function [Pn,varargout] = Legendre(x,N)
             end
             Pn = a1(N-1) .* x .* Pkm1 + a2(N-1) .* Pkm2;
             
+
+            %   Return DPn if a second output exists
             if (nargout > 1)
                 DPn     = (x.*Pn - Pkm1)./(x.^2-1)*N;
                 isUnity = abs(x) == 1;
                 DPn(isUnity) = x(isUnity).^(N+1) * N*(N+1)/2;
                 varargout{1} = DPn;
             end
+            
+            %   Return DDPn if a third output exists
             if (nargout > 2)
                 % Derivative of N-1 polynomial
                 DPnm1          = (x.*Pkm1 - Pkm2)./(x.^2-1)*(N-1);

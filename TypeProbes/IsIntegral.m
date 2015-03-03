@@ -1,7 +1,7 @@
 function Logical = IsIntegral(Number,DesiredSign)
 	
-	error(nargchk(1,2,nargin))                                                  ;
-    Type = WhatIsThis(Number)                                                   ;
+	narginchk(1,2)              ;
+    Type = WhatIsThis(Number)   ;
     
 	switch(Type)
 		case('numeric')
