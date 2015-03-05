@@ -7,59 +7,40 @@ function [Nodes,Weights] = GaussLegendreSet(n)
     %  Weights = --------------------------- ; (Abramowitz & Stegun 1972, p.887)
     %             (1-Node^2)*[dPdx(Nodes)^2]
     %
-    
-    switch(n)
-        case(1)
-            Nodes   = 0;
-            Weights = 2;
-            
-        case(2)
-            Nodes   = sqrt(1/3)*([-1;1]);
-            Weights = [1;1]             ;
-            
-        case(3)
-            Nodes   = sqrt(3/5)*[-1;0;1];
-            Weights = [5/9;8/9;5/9]     ;
-            
-        case(4)
-            c = 2/7*sqrt(6/5);
-            cHi = sqrt(3/7 + c);
-            cLo = sqrt(3/7 - c);
-            Nodes = [-cHi;-cLo;cLo;cHi];
 
-            c   = sqrt(30);
-            cHi = (18 - c)/36;
-            cLo = (18 + c)/36;
-            Weights = [cHi;cLo;cLo;cHi];
-            
-        otherwise
-            d = (0:n)';
-            a = (d+1)./(2*d+1);
-            b = 0*a;
-            c = d./(2*d+1);
-            Nodes   = GolubWelschPartial(a,b,c);
-            Nodes   = newtonCorrection(Nodes,n);
-            Weights = 2/(n+1)^2*(1-Nodes.^2)./(Legendre(Nodes,n+1).^2);
+    if (n == 0)
+        error('There is no Gauss-Legendre rule of order 0.');
+    elseif IsNotIntegral(n,'+')
+        error('Given order ''n'' must be a strictly positive integer.');
     end
     
+    
+    %   Get the nodes from the roots function
+    Nodes = LegendreRoots(n);
 
-    function nodes = newtonCorrection(nodes,n)
-        iter     = 0    ;
-        iterMax  = 10   ;
-        absTol   = eps();
-        
-        [Pn,DPn] = Legendre(nodes,n);
-        dnode    = Pn./DPn          ;
-        
-        notDone = (norm(dnode,Inf) > absTol) & (iter < iterMax);
-        while notDone
-            nodes    = nodes - dnode    ;
-            [Pn,DPn] = Legendre(nodes,n);
-            dnode    = Pn./DPn          ;
-            iter     = iter + 1         ;
-            
-            notDone  = (norm(dnode,Inf) > absTol) & (iter < iterMax);
-        end
+    
+    %   Calculate the weights
+    switch(n)
+        case(1)
+            Weights = 2;
+
+        case(2)
+            Weights = [1;1];
+
+        case(3)
+            Weights = [5;8;5]/9;
+
+        case(4)
+            c       = (18 + sqrt(30)*[1;-1])/36 ;
+            Weights = [-c(1);-c(2);c(2);c(1)]   ;
+
+        case(5)
+            c       = (322 + 13*sqrt(70)*[-1;1])/900    ;
+            Weights = [c(1);c(2);128/225;c(2);c(1)]     ;
+
+        otherwise
+            Weights = 2/(n+1)^2*(1-Nodes.^2)./(Legendre(Nodes,n+1).^2);
+
     end
     
 end

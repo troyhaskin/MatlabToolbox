@@ -17,10 +17,12 @@ function Roots = LegendreRoots(n)
             Roots   = sqrt(3/5)*[-1;0;1];
             
         case(4)
-            c = 2/7*sqrt(6/5);
-            cHi = sqrt(3/7 + c);
-            cLo = sqrt(3/7 - c);
-            Roots = [-cHi;-cLo;cLo;cHi];
+            c = sqrt(3/7 + 2/7*sqrt(6/5)*[1;-1]);
+            Roots = [-c(1);-c(2);c(2);c(1)];
+            
+        case(5)
+            c     = sqrt(245 + 14*sqrt(70)*[1;-1])/21   ;
+            Roots = [-c(1);-c(2);0;c(2);c(1)]           ;
             
         otherwise
             d = (0:n)';
