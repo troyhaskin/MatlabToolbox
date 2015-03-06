@@ -47,28 +47,35 @@ function [Pn,varargout] = Legendre(x,N)
             Pn = a1(N-1) .* x .* Pkm1 + a2(N-1) .* Pkm2;
             
 
+            %   Allocate varaible output
+            varargout = cell(1,nargout-1);
+            
             %   Return DPn if a second output exists
             if (nargout > 1)
                 DPn     = (x.*Pn - Pkm1)./(x.^2-1)*N;
                 isUnity = abs(x) == 1;
                 DPn(isUnity) = x(isUnity).^(N+1) * N*(N+1)/2;
-                varargout{1} = DPn;
             end
             
             %   Return DDPn if a third output exists
             if (nargout > 2)
                 % Derivative of N-1 polynomial
-                DPnm1          = (x.*Pkm1 - Pkm2)./(x.^2-1)*(N-1);
-                DPnm1(isUnity) = x(isUnity).^(N) * (N-1)*(N)/2;
+                DPnm1          = (x.*Pkm1 - Pkm2)./(x.^2-1)*(N-1)   ;
+                DPnm1(isUnity) = x(isUnity).^(N) * (N-1)*(N)/2      ;
                 
                 %   Second derivative
-                DDPn = ((1-2/N)*x.*DPn - DPnm1 + Pn)./(x.^2-1)*N;
-                DDPn(isUnity) = x(isUnity).*DPn(isUnity)*(N-1)*(N+2)/4;
-                varargout{2} = DDPn;
+                DDPn = ((1-2/N)*x.*DPn - DPnm1 + Pn)./(x.^2-1)*N        ;
+                DDPn(isUnity) = x(isUnity).*DPn(isUnity)*(N-1)*(N+2)/4  ;
+            else
+                DDPn  = [];
+                DPnm1 = [];
             end
+            
+            if (nargout > 1)
+                additionalOutput = {DPn,DDPn,Pkm1,Pkm2,DPnm1}   ;
+                varargout(1:end) = additionalOutput(1:nargout-1);
+            end
+
     end
-    
-    
-    
     
 end
