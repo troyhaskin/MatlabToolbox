@@ -1,6 +1,6 @@
 function [nodes,weights] = RadauSet(n)
     
-    %   Initial guess (Chebyshev nodes)
+    %   Initial guess (foward-shifted Chebyshev nodes)
     nodes = cos((2*(n-1:-1:1)'-1)/(2*n)*pi);
     
     %   Prepare for Aberth iterations
@@ -15,9 +15,10 @@ function [nodes,weights] = RadauSet(n)
     rodr  = r./dr                                                   ;
     dnode = rodr./(1 - rodr .* sum(bsxfun(@minus,nodes,nodes'),2))  ;
     
+    %   Enter loop
     notDone = (norm(dnode,Inf) > absTol) & (iter < iterMax);
     while notDone
-        %   Shift nodes
+        %   Update
         nodes    = nodes - dnode    ;
         
         %   Computer Aberth update
@@ -26,15 +27,16 @@ function [nodes,weights] = RadauSet(n)
         dr    = (DPnm1 + DPn - r)./(1+nodes)                            ;
         rodr  = r./dr                                                   ;
         dnode = rodr./(1 - rodr .* sum(bsxfun(@minus,nodes,nodes'),2))  ;
-        iter     = iter + 1         ;
         
+        %   Termination check
+        iter     = iter + 1                                     ;
         notDone  = (norm(dnode,Inf) > absTol) & (iter < iterMax);
     end
     
     %   Calculate weights
-    weights = 1./((1-nodes).*DPnm1.^2);
-    nodes   = [-1 ; nodes];
-    weights = [2./n^2 ; weights] ; 
+    weights = 1./((1-nodes).*DPnm1.^2)  ;
+    nodes   = [-1 ; nodes]              ;
+    weights = [2./n^2 ; weights]        ;
     
 end
 
