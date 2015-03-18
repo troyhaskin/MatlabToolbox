@@ -1,4 +1,4 @@
-function [nodesG,weightsG,nK,wK] = GaussKronrodSet(N)
+function [nodesG,weightsG,nK,wK] = GaussKronrodRule(N)
 % ------------------------------------------------------------------------------
 %  Find the nodes and weights for a Gauss-Laguerre Quadrature integration.
 %  Nodes   = Roots of Nth order Laguerre Polynomial

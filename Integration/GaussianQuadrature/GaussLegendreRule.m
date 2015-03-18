@@ -1,4 +1,4 @@
-function [Nodes,Weights] = GaussLegendreSet(n)
+function [Nodes,Weights] = GaussLegendreRule(n)
     % ------------------------------------------------------------------------------
     %  Find the nodes and weights for a Gauss-Legendre Quadrature integration.
     %  Nodes   = Roots of Nth order Legendre Polynomial

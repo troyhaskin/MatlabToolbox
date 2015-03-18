@@ -17,6 +17,6 @@ function xk = GolubWelschPartial(ak,bk,ck)
     T = spdiags([[alpha;0],bk,[0;alpha]],[-1,0,+1],length(alpha),length(alpha));
     
     %   Calculate the eigenvectors and values of the matrix
-    xk = eig(full(T),'vector');
+    xk = eig(T);
     
 end

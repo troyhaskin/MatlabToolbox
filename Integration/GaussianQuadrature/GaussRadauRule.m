@@ -1,4 +1,4 @@
-function [nodes,weights] = RadauSet(n)
+function [nodes,weights] = GaussRadauRule(n)
     
     %   Initial guess (foward-shifted Chebyshev nodes)
     nodes = cos((2*(n-1:-1:1)'-1)/(2*n)*pi);

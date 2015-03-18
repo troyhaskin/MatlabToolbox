@@ -1,4 +1,4 @@
-function Ln = LaguerreP(x,n,alpha)
+function Ln = Laguerre(x,n,alpha)
 
     if (nargin < 3)
         alpha = 0;
@@ -24,12 +24,14 @@ function Ln = LaguerreP(x,n,alpha)
     %
     
     % Recurrence coefficients
-    OneOverK = 1 ./ (1:n);
-    alphax1  = alpha - x - 1;
+    n    = 2:n;
+    invk = 1./n;
+    a1   = 2*n + alpha - 1;
+    a2   =  -n - alpha + 1;
     
     % Recurrence loop
-    for k = 2:n
-        Ln      = ((2*k + alphax1) .* Lnm1 - (k - 1 + alpha) * Lnm2) * OneOverK(k)  ;
+    for k = n-1
+        Ln      = ( (a1(k) - x) .* Lnm1 + a2(k) * Lnm2) * invk(k)  ;
         Lnm2    = Lnm1 ;
         Lnm1    = Ln   ;
     end

@@ -1,4 +1,4 @@
-function [nodes,weights] = GaussLobattoSet(n)
+function [nodes,weights] = GaussLobattoRule(n)
     
     
     if (n == 1) || (n == 0)
