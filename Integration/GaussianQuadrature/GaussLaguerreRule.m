@@ -1,7 +1,7 @@
 function [nodes,weights] = GaussLaguerreRule(n,alpha)
     % ------------------------------------------------------------------------------
-    %  Find the nodes and weights for a Gauss-Legendre Quadrature integration.
-    %  Nodes   = Roots of Nth order Legendre Polynomial
+    %  Find the nodes and weights for a Gauss-Laguerre integration.
+    %  nodes = Roots of nth order Laguerre Polynomial
     %
     %                        2
     %  Weights = --------------------------- ; (Abramowitz & Stegun 1972, p.887)

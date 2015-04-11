@@ -73,44 +73,6 @@ function TheCallerDirectory = CallerDirectory(Level)
     end
 
 
-
-%     % Level selection
-%     switch (Level)
-%         
-%         case -1
-%             
-%         
-%         %   An empty call stack implies a call from the command line, so return
-%         %   the current working directory with an appended separator.
-%         case 0
-%             TheCallerDirectory = [SplitPath(Stack(2).file,'DirectoryPath'),filesep()];
-% 
-% 
-%         %   A call stack with 1 entry implies a call from a script with no function 
-%         %   nesting, so return the directory of the only entry with an appended 
-%         %   separator.
-%         case 2
-%              TheCallerDirectory = [SplitPath(Stack(1).file,'DirectoryPath'),filesep()];
-% 
-% 
-%         %   A call stack with more than 1 entry implies a call from a function with 
-%         %   atleast one nesting, so we'll attack this generally.
-%         otherwise
-%             CallersPath  = Stack(1).file;
-%             LineagePaths = {Stack(2:end).file};
-%             
-%             if (0 < DifferentNames) && not(isempty(LineagePaths))
-%                 Paths    = unique(LineagePaths,'stable');
-%                 Mask     = cumsum(not(strcmpi(CallersPath,Paths)));
-%                 FullPath = Paths{find(Mask == DifferentNames,1,'first')};
-%                 
-%                 TheCallerDirectory = [SplitPath(FullPath,'DirectoryPath'),filesep()];
-%                 
-%             else
-%                 TheCallerDirectory = [CallersPath,filesep()];
-%             end
-%     end
-    
 end
 
 
