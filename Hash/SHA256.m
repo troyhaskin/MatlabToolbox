@@ -1,26 +1,26 @@
-function Hash = SHA256(Message)
+function Hash = SHA256(message)
     
     % Helper functions
-    R   = @(v,n) bitshift(v,-n);
-    S   = @(v,n) bitor(bitshift(v,-n),bitshift(v,(32-n)));
-    Ch  = @(x,y,z) bitxor( bitand(x,y) , bitand(bitcmp(x),z) );
-    Maj = @(x,y,z) bitxor( bitand(x,y) , bitxor( bitand(x,z) , bitand(y,z) ));
-    SIGMA0 = @(x)  bitxor( S(x,02), bitxor( S(x,13) , S(x,22) ));
-    SIGMA1 = @(x)  bitxor( S(x,06), bitxor( S(x,11) , S(x,25) ));
-    sigma0 = @(x)  bitxor( S(x,07), bitxor( S(x,18) , R(x,03) ));
-    sigma1 = @(x)  bitxor( S(x,17), bitxor( S(x,19) , R(x,10) ));
-    Mod32Add = @(x) uint32(mod(sum(uint64(x)),2^32));
+    R        = @(v,n)   bitshift(v,-n)                                              ;
+    S        = @(v,n)   bitor(bitshift(v,-n),bitshift(v,(32-n)))                    ;
+    Ch       = @(x,y,z) bitxor( bitand(x,y) , bitand(bitcmp(x),z) )                 ;
+    Maj      = @(x,y,z) bitxor( bitand(x,y) , bitxor( bitand(x,z) , bitand(y,z) ))  ;
+    SIGMA0   = @(x)     bitxor( S(x,02), bitxor( S(x,13) , S(x,22) ))               ;
+    SIGMA1   = @(x)     bitxor( S(x,06), bitxor( S(x,11) , S(x,25) ))               ;
+    sigma0   = @(x)     bitxor( S(x,07), bitxor( S(x,18) , R(x,03) ))               ;
+    sigma1   = @(x)     bitxor( S(x,17), bitxor( S(x,19) , R(x,10) ))               ;
+    Mod32Add = @(x)     uint32(mod(sum(uint64(x)),2^32))                            ;
     
     % Initial hash vector and constants
     [H,K] = LoadSHA256InitialVectorAndConstants();
     
     % Cast to a string if needed
-    if isnumeric(Message);
-        Message = num2str(Message);
+    if isnumeric(message);
+        message = num2str(message);
     end
     
     % Count the number of bits in Message assuming an 8-bit encoding
-    M = dec2bin(Message,8);
+    M = dec2bin(message,8);
     l = numel(M);
     
     % Determine the length of the zero padding
@@ -64,7 +64,7 @@ function Hash = SHA256(Message)
             a = Mod32Add([T1,T2]);
         end
         
-        % Perform the last iterations, now Wj needs to be calculate
+        % Perform the last iterations, now Wj needs to be calculated
         for j = 17:64
             W(j) = Mod32Add([sigma1(W(j-2)),W(j-7),sigma0(W(j-15)),W(j-16)]) ;
             T1 = Mod32Add([h,SIGMA1(e),Ch(e,f,g),K(j),W(j)]);

@@ -6,7 +6,7 @@ function VFcorrected = EnforceConsistency(VF,SA,RelTol,Norm)
     
     if   (numel(SA) == 1)
         SA = ones(size(VF)) * SA;
-    else (size(SA,1) == Nvf)
+    elseif all(size(SA) == [Nvf,1])
         SA = repmat(SA,1,Nvf);
     end
     

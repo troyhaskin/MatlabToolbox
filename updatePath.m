@@ -1,15 +1,20 @@
-function [] = updatePath(directory,excludeTopDirectory)
+function [] = updatePath(directory,directoriesToExclude,excludeTopDirectory)
     
-    if (nargin ~= 1) || isempty(directory)
+    if (nargin < 1) || isempty(directory)
         directory = pwd();
     end
     
-    if (nargin ~= 2) || isempty(excludeTopDirectory)
+    if (nargin < 2) || isempty(directoriesToExclude)
+        directoriesToExclude = {'.git','Sandbox','private'};
+    else
+        directoriesToExclude = [directoriesToExclude(:);{'.git';'Sandbox';'private'}]';
+    end
+    
+    if (nargin < 3) || isempty(excludeTopDirectory)
         excludeTopDirectory  = false;
     end
     
     % Setup exclusions
-    directoriesToExclude = {'.git','Sandbox','private'};
     directoriesToExclude = directoriesToExclude(:)' ;
     
     % Generate the full toolbox path
