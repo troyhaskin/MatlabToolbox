@@ -1,17 +1,17 @@
-function [] = updatePath(directory,directoriesToExclude,excludeTopDirectory)
+function [] = updatePath(directory,excludeTopDirectory,directoriesToExclude)
     
     if (nargin < 1) || isempty(directory)
         directory = pwd();
     end
     
-    if (nargin < 2) || isempty(directoriesToExclude)
+    if (nargin < 2) || isempty(excludeTopDirectory)
+        excludeTopDirectory  = false;
+    end
+    
+    if (nargin < 3) || isempty(directoriesToExclude)
         directoriesToExclude = {'.git','Sandbox','private'};
     else
         directoriesToExclude = [directoriesToExclude(:);{'.git';'Sandbox';'private'}]';
-    end
-    
-    if (nargin < 3) || isempty(excludeTopDirectory)
-        excludeTopDirectory  = false;
     end
     
     % Setup exclusions

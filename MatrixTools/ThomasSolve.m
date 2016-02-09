@@ -1,19 +1,19 @@
-function xSol = ThomasSolve(L,D,U,b)
+function xSol = ThomasSolve(l,d,u,b)
     
-    End			= length(D) ;
+    End			= length(d) ;
     Umod(End,1)	= 0.0       ;
     Bmod(End,1)	= 0.0       ;
     
-    Umod(1) = U(1)/D(1);
-    Bmod(1) = b(1)/D(1);
+    Umod(1) = u(1)/d(1);
+    Bmod(1) = b(1)/d(1);
     
     for k = 2:End-1
-        invTerm = 1 / (D(k) - Umod(k-1)*L(k))       ;
-        Umod(k) = U(k) * invTerm                    ;
-        Bmod(k) = (b(k) - Bmod(k-1)*L(k)) * invTerm ;
+        invTerm = 1 / (d(k) - Umod(k-1)*l(k))       ;
+        Umod(k) = u(k) * invTerm                    ;
+        Bmod(k) = (b(k) - Bmod(k-1)*l(k)) * invTerm ;
     end
     
-    Bmod(End) = (b(End) - Bmod(End-1)*L(End)) / (D(End) - Umod(End-1)*L(End));
+    Bmod(End) = (b(End) - Bmod(End-1)*l(End)) / (d(End) - Umod(End-1)*l(End));
     
     xSol(End,1) = Bmod(End);
     
