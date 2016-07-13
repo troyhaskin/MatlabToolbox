@@ -1,0 +1,9 @@
+function y = hermiteInterpolate(xs,ys,Dys,x)
+
+    t = (x - xs(:,1))./(xs(:,2) - xs(:,1));
+    y = ( 2*t.^3 - 3*t.^2 + 1) *  ys(:,1)                           + ...
+        (   t.^3 - 2*t.^2 + t) * Dys(:,1) .* (xs(:,2) - xs(:,1))    + ...
+        (-2*t.^3 + 3*t.^2 )    *  ys(:,2)                           + ...
+        (   t.^3 -   t.^2 )    * Dys(:,2) .* (xs(:,2) - xs(:,1))    ;
+
+end

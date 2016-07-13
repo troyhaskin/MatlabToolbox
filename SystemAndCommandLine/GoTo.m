@@ -12,7 +12,7 @@ function [] = GoTo(Location)
 		case('school')
             
 		case({'desk','desktop'})
-			cd('C:\Users\Troy Haskin\Desktop');
+			cd('C:\Users\Troy Haskin 2\Desktop');
             
 		case({'tool','toolbox'})
 			cd('C:\Projects\MatlabToolbox\');
