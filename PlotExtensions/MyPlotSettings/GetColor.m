@@ -1,69 +1,39 @@
-function Color = GetColor(Request)
+function color = GetColor(request)
     
-    if    (ischar(Request))
-        Color = ColorLibraryCall(Request);
+    colors.black   = [0.0 , 0.0 , 0.0];
+    colors.red     = [1.0 , 0.0 , 0.0];
+    colors.green   = [0.0 , 0.6 , 0.0];
+    colors.blue    = [0.0 , 0.0 , 1.0];
+    colors.purple  = [0.6 , 0.0 , 0.6];
+    colors.orange  = [1.0 , 0.5 , 0.0];
+    colors.magenta = [1.0 , 0.0 , 1.0];
+    colors.cyan    = [0.0 , 1.0 , 1.0];
+    colors.grey    = [0.8 , 0.8 , 0.8];
+    colors.yellow  = [1.0 , 1.0 , 0.0];
+    colors.white   = [1.0 , 1.0 , 1.0];
+    colors.gray    = colors.grey;
+    
+    
+    if (ischar(request))
+        if isfield(colors,lower(request))
+            color = colors.(request);
+        else
+            error('The requested color ''%s'' could not be found',request);
+        end
         
-    elseif(isscalar(Request) || iscell(Request))
-        Color = GetSetOfColors(Request);
+    elseif iscellstr(request)
+        
+        color = zeros(numel(request),3);
+        for k = 1:numel(color)
+            if isfield(colors,lower(request{k}))
+                color(k,:) = colors.(request{k});
+            end
+        end
         
     else
-        error('Expected string or scalar input.');
+        error('Expected string or a cell array of strings.');
     end
     
 end
 
-
-
-function List = GetDefaultColorFlow()
-    List = { 'yellow','black','blue'   , 'red' , 'green','purple' ,...
-        'orange', 'magenta', 'cyan'};
-end
-
-
-
-function Colors = GetSetOfColors(Request)
-    if (isscalar(Request))
-        List   = GetDefaultColorFlow();
-        Colors = cell(Request,1);
-        for k = 1:Request
-            Colors{k} = ColorLibraryCall(List{mod(k,9)+1});
-        end
-    elseif(iscell(Request))
-        List = Request;
-        Colors = Request;
-        for k = 1:length(Request)
-            Colors{k} = ColorLibraryCall(List{mod(k,9)});
-        end
-    end
-end
-
-
-
-function Color = ColorLibraryCall(Request)
-    switch (lower(Request))
-        case('black')
-            Color = [0.0, 0.0, 0.0];
-        case('blue')
-            Color = [0.0, 0.0, 1.0];
-        case('red')
-            Color = [1.0, 0.0, 0.0];
-        case('purple')
-            Color = [0.6, 0.0, 0.6];
-        case('orange')
-            Color = [1.0, 0.5, 0.0];
-        case('green')
-            Color = [0.0, 0.6, 0.0];
-        case('magenta')
-            Color = [1.0, 0.0, 1.0];
-        case('cyan')
-            Color = [0.0, 1.0, 1.0];
-        case({'grey','gray'})
-            Color = [0.8, 0.8, 0.8];
-        case('yellow')
-            Color = [1.0, 1.0, 0.0];
-        case('white')
-            Color = [1.0, 1.0, 1.0];
-        otherwise
-            error('Color request ''%s'' is not currently supported.',Request)
-    end
-end
+ 
